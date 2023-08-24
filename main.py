@@ -16,8 +16,9 @@ def load_contour_by_NAME_JA(name: str) -> np.ndarray:
     return np.array(polygon.exterior.coords)
 
 
-country1_contour = load_contour_by_NAME_JA("ナミビア")
-country2_contour = load_contour_by_NAME_JA("アンゴラ")
+# トルクメニスタン、ウズベキスタン、アフガニスタン、パキスタンの比較はわかりやすいかも
+country1_contour = load_contour_by_NAME_JA("パキスタン")
+country2_contour = load_contour_by_NAME_JA("トルクメニスタン")
 
 similarity_score = cv2.matchShapes(
     country1_contour, country2_contour, cv2.CONTOURS_MATCH_I1, 0
