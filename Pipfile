@@ -9,6 +9,7 @@ scipy = "*"
 shapely = "*"
 geopandas = "*"
 opencv-python = "*"
+geojson = "*"
 
 [dev-packages]
 

@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 import geopandas as gpd
 from shapely.geometry import MultiPolygon
+from geojson import Polygon, Feature, FeatureCollection, dump
 
 
 geojson_path = "test2.geojson"
@@ -17,10 +18,16 @@ def load_contour_by_NAME_JA(name: str) -> np.ndarray:
 
 
 # トルクメニスタン、ウズベキスタン、アフガニスタン、パキスタンの比較はわかりやすいかも
-country1_contour = load_contour_by_NAME_JA("パキスタン")
-country2_contour = load_contour_by_NAME_JA("トルクメニスタン")
+country1_contour = load_contour_by_NAME_JA("オーストラリア")
+# country2_contour = load_contour_by_NAME_JA("トルクメニスタン")
 
-similarity_score = cv2.matchShapes(
-    country1_contour, country2_contour, cv2.CONTOURS_MATCH_I1, 0
+# similarity_score = cv2.matchShapes(
+#     country1_contour, country2_contour, cv2.CONTOURS_MATCH_I1, 0
+# )
+# print(similarity_score)
+
+feature = Feature(
+    geometry=Polygon(coordinates=[country1_contour.tolist()]), properties={}
 )
-print(similarity_score)
+with open("output.geojson", "w") as f:
+    dump(feature, f, indent=2)
